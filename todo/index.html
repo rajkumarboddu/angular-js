@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="todoApp">
+<head>
+	<title>ToDo - Angular JS</title>
+	<style>
+	.tasks{
+		width: 300px;
+	}
+	.tasks > li {
+		height: 30px;
+		padding: 3px 5px;
+	}
+	.tasks > li > button.remove-btn, .tasks > li > button.complete-btn{
+		float: right;
+		margin-right: 3px;
+	}
+	#taskText{
+		width: 300px;
+	}
+	.completed-task, .completed-tasks{
+		background-color : #b0fdb0;
+	}
+	#task-table td, th{
+		width: 300px;
+	}
+	small{
+		text-align: center;
+		display: block;
+		padding-top: 30px;
+	}
+	</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script type="text/javascript" src="js/todo.js"></script>
+</head>
+<body ng-controller="TaskController as taskCtrl">
+<h4>To Do App</h4>
+<p>
+<input type="text" placeholder="Task Name..." ng-model="taskText" id="taskText" ng-keypress="taskCtrl.addTask(taskText,$event)" /> 
+<button ng-click="taskCtrl.addTask(taskText)">Add</button>
+</p>
+<p>
+	<table id="task-table">
+		<tr>
+			<th>
+				All Tasks
+			</th>
+			<th class="completed-tasks">
+				Completed Tasks
+			</th>
+		</tr>
+		<tr>
+			<td>
+				<small ng-show="taskCtrl.tasks.length == 0">Tasks not found</small>
+				<ol id="all-tasks" class="tasks">
+					<li ng-repeat="task in taskCtrl.tasks">
+						{{task.task_text}} 
+						<button ng-click="taskCtrl.removeTask($index)" class="remove-btn">X</button>
+						<button ng-show="!task.is_completed" ng-click="taskCtrl.markAsComplete($index)" class="complete-btn">
+						{{(task.is_completed===true) ? 'Completed' : 'Mark as Complete'}}
+						</button>
+					</li>
+				</ol>
+			</td>
+			<td class="completed-tasks">
+				<small  ng-show="(taskCtrl.tasks | completedTasks).length == 0">Completed tasks not found</small>
+				<ol id="completed-tasks" class="tasks">
+					<li ng-repeat="task in taskCtrl.tasks | completedTasks">
+						{{task.task_text}} 
+						<button ng-click="taskCtrl.markAsInComplete($index)" class="remove-btn">X</button>
+					</li>
+				</ol>
+			</td>
+		</tr>
+	</table>
+</p>
+</body>
+</html>

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html ng-app="stopWatchApp">
+<head>
+	<title>Stop Watch - Angular JS</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script type="text/javascript" src="js/stopWatch.js"></script>
+</head>
+<body ng-controller="TimerController as tCtrl">
+<h4>Stop Watch</h4>
+<p>
+{{tCtrl.minutes}} : {{tCtrl.seconds}} : {{tCtrl.millis}}
+</p>
+<button ng-click="tCtrl.start()">Start</button> &emsp;
+<button ng-click="tCtrl.stop()">Stop</button> &emsp;
+<button ng-click="tCtrl.reset()">Reset</button>
+</body>
+</html>
