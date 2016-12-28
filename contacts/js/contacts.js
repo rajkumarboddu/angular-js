@@ -1,4 +1,4 @@
-var contactsApp = angular.module('contactsApp',['ng-route']);
+var contactsApp = angular.module('contactsApp',['ngRoute']);
 
 contactsApp.config(function($routeProvider){
 	$routeProvider
