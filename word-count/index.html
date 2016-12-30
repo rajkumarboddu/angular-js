@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html ng-app="wordCountApp">
+<head>
+	<title>Word Count</title>
+	<script src="js/angular.min.js"></script>
+	<script src="js/app.js"></script>
+</head>
+<body>
+<div ng-controller="MainController as mCtrl">
+	<table>
+		<tr>
+			<td>
+				<select ng-model="caseType" ng-change="mCtrl.changeCase(caseType,input)">
+					<option value="">Select Case</option>
+					<option value="uCase">UPPER CASE</option>
+					<option value="lCase">lower case</option>
+					<option value="cCase">Camel Case</option>
+				</select>
+				<button ng-click="input=''">Clear</button>
+				<button ng-click="mCtrl.undo()">Undo</button>
+				<button ng-click="mCtrl.redo()">Redo</button>
+			</td>
+			<td rowspan="2">
+				<p>Words count : {{mCtrl.words.length}}</p>
+				<p>Characters count : {{mCtrl.char_count}}</p>
+			</td>
+			<td>
+				<ol>
+					<li ng-repeat="item in mCtrl.repetitive_list">{{item.word}} ({{item.count}})</li>
+				</ol>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<textarea spellcheck="{{mCtrl.spellcheck}}" ng-model="input" rows="10" cols="100" ng-keyup="mCtrl.calculate(input)"></textarea>
+			</td>
+		</tr>
+	</table>
+</div>
+</body>
+</html>
